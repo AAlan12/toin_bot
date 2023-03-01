@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'questions/good_manners.dart';
 import 'questions/time_questions.dart';
 import 'timing/waiting_time.dart';
 
@@ -11,9 +12,9 @@ void main() async {
 
   var myStream = BotClock().toinStream(1,10);
   var subscriber = myStream.listen((event) {
-    print("                     Toinbot is activated for $event seconds");
+    print("                     Toinbot está ativo por $event segundos");
   },onDone: () {
-    print("Toinbot is finishing its work, ask the last question");
+    print("Toinbot está sendo finalizado, faça a ultima pergunta");
     a = false;
   });
   
@@ -35,6 +36,8 @@ void main() async {
       // verificar antes, assim não fazemos toda a função sem precisar.
       await BotClock().clock(2);
       TimeQuestions(usuario).timeQuestion();
+    } else if (GoodManners(usuario).isThisManners()) {
+      GoodManners(usuario).goodManners();
     } else if (false) {
       //Basta adicionar novas perguntas aqui!
     } else {
